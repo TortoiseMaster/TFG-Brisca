@@ -82,7 +82,7 @@ public class Deck {
             this.deck[i] = this.deck[random];
             this.deck[random] = copy;
         }
-        force7();
+        // force7();
     }
 
     private void force7() {
