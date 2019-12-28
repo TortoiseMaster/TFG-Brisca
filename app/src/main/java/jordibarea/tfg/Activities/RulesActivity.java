@@ -52,7 +52,7 @@ public class RulesActivity extends Activity {
                 TextView title = (TextView) findViewById(R.id.textRulesSubTitle);
                 TextView content = (TextView) findViewById(R.id.textRulesContent);
                 title.setText("Manos");
-                content.setText("- El ganador de la mano anterior tira la primera carta\nQuien gana? \n · Gana la carta mas alta del palo de la brisca  \n · Si no hay, gana la carta mas alta del palo de la primera carta tirada \n- El ganador suma los puntos de las cartas jugadas");
+                content.setText("- El ganador de la mano anterior tira la primera carta\nQuien gana? \n · Gana la carta mas alta del palo de la brisca  \n · Si no hay, gana la carta mas alta del palo de la primera carta tirada \n- El jugador suma los puntos de las cartas ganadas");
             }
         });
         next = (Button) findViewById(R.id.rulesPoints);

@@ -31,15 +31,15 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        next = (Button) findViewById(R.id.buttonContinueGame);
-        next.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                buttonSound.start();
-                Intent myIntent = new Intent(view.getContext(), GameActivity.class);
-                startActivityForResult(myIntent, 0);
-            }
-
-        });
+//        next = (Button) findViewById(R.id.buttonContinueGame);
+//        next.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View view) {
+//                buttonSound.start();
+//                Intent myIntent = new Intent(view.getContext(), GameActivity.class);
+//                startActivityForResult(myIntent, 0);
+//            }
+//
+//        });
 
         next = (Button) findViewById(R.id.buttonConfiguration);
         next.setOnClickListener(new View.OnClickListener() {

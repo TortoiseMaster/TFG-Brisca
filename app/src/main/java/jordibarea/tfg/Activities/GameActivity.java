@@ -64,7 +64,7 @@ public class GameActivity extends Activity {
     private void initGame(){
         this.cardsLeft -= 1;
         textCardsRemaining.setContentDescription("Cartas en la baraja "+this.cardsLeft);
-        textCardsRemaining.setText("" + this.cardsLeft);
+        textCardsRemaining.setText(" " + this.cardsLeft + " ");
         this.player.drawCard(0,this.deck.getCard(this.cardsLeft));
         ImageButton next = (ImageButton) findViewById(R.id.buttonCard1);
         // next.setText(this.deck.getCard(this.cardsLeft).toString());
@@ -74,13 +74,13 @@ public class GameActivity extends Activity {
 
         this.cardsLeft -=1;
         textCardsRemaining.setContentDescription("Cartas en la baraja "+this.cardsLeft);
-        textCardsRemaining.setText("" + this.cardsLeft);
+        textCardsRemaining.setText(" " + this.cardsLeft + " ");
         this.rival.drawCard(0,this.deck.getCard(this.cardsLeft));
         textCardsRemaining.setContentDescription("Cartas en la baraja "+this.cardsLeft);
-        textCardsRemaining.setText("" + this.cardsLeft);
+        textCardsRemaining.setText(" " + this.cardsLeft + " ");
         this.cardsLeft -=1;
         textCardsRemaining.setContentDescription("Cartas en la baraja "+this.cardsLeft);
-        textCardsRemaining.setText("" + this.cardsLeft);
+        textCardsRemaining.setText(" " + this.cardsLeft + " ");
         this.player.drawCard(1,this.deck.getCard(this.cardsLeft));
         next = (ImageButton) findViewById(R.id.buttonCard2);
         // next.setText(this.deck.getCard(this.cardsLeft).toString());
@@ -90,12 +90,12 @@ public class GameActivity extends Activity {
 
         this.cardsLeft -=1;
         textCardsRemaining.setContentDescription("Cartas en la baraja "+this.cardsLeft);
-        textCardsRemaining.setText("" + this.cardsLeft);
+        textCardsRemaining.setText(" " + this.cardsLeft + " ");
         this.rival.drawCard(1,this.deck.getCard(this.cardsLeft));
 
         this.cardsLeft -=1;
         textCardsRemaining.setContentDescription("Cartas en la baraja "+this.cardsLeft);
-        textCardsRemaining.setText("" + this.cardsLeft);
+        textCardsRemaining.setText(" " + this.cardsLeft + " ");
         this.player.drawCard(2,this.deck.getCard(this.cardsLeft));
         next = (ImageButton) findViewById(R.id.buttonCard3);
         // next.setText(this.deck.getCard(this.cardsLeft).toString());
@@ -105,7 +105,7 @@ public class GameActivity extends Activity {
 
         this.cardsLeft -=1;
         textCardsRemaining.setContentDescription("Cartas en la baraja "+this.cardsLeft);
-        textCardsRemaining.setText("" + this.cardsLeft);
+        textCardsRemaining.setText(" " + this.cardsLeft + " ");
         this.rival.drawCard(2,this.deck.getCard(this.cardsLeft));
 
         this.pal = this.deck.getCard(0);
@@ -266,7 +266,7 @@ public class GameActivity extends Activity {
 
                 this.cardsLeft -= 1;
                 textCardsRemaining.setContentDescription("Cartas en la baraja "+this.cardsLeft);
-                textCardsRemaining.setText("" + this.cardsLeft);
+                textCardsRemaining.setText(" " + this.cardsLeft + " ");
                 this.player.drawCard(playerCardUsed,this.deck.getCard(this.cardsLeft));
                 if(this.cardsLeft == 0){
                     ImageView deckImage = (ImageView) findViewById(R.id.deck);
@@ -293,7 +293,7 @@ public class GameActivity extends Activity {
                 }
                 this.cardsLeft -= 1;
                 textCardsRemaining.setContentDescription("Cartas en la baraja "+this.cardsLeft);
-                textCardsRemaining.setText("" + this.cardsLeft);
+                textCardsRemaining.setText(" " + this.cardsLeft + " ");
                 this.rival.drawCard(rivalCardUsed,this.deck.getCard(this.cardsLeft));
                 if(this.cardsLeft == 0){
                     ImageView deckImage = (ImageView) findViewById(R.id.deck);
@@ -308,7 +308,7 @@ public class GameActivity extends Activity {
                 playerThrownImg.announceForAccessibility("Gana rival");
                 this.cardsLeft -= 1;
                 textCardsRemaining.setContentDescription("Cartas en la baraja "+this.cardsLeft);
-                textCardsRemaining.setText("" + this.cardsLeft);
+                textCardsRemaining.setText(" " + this.cardsLeft + " ");
                 this.rival.drawCard(rivalCardUsed,this.deck.getCard(this.cardsLeft));
                 if(this.cardsLeft == 0){
                     ImageView deckImage = (ImageView) findViewById(R.id.deck);
@@ -319,7 +319,7 @@ public class GameActivity extends Activity {
                 }
                 this.cardsLeft -= 1;
                 textCardsRemaining.setContentDescription("Cartas en la baraja "+this.cardsLeft);
-                textCardsRemaining.setText("" + this.cardsLeft);
+                textCardsRemaining.setText(" " + this.cardsLeft + " ");
                 this.player.drawCard(playerCardUsed,this.deck.getCard(this.cardsLeft));
                 if(this.cardsLeft == 0){
                     ImageView deckImage = (ImageView) findViewById(R.id.deck);

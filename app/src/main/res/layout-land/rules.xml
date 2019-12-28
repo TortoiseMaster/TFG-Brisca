@@ -21,10 +21,12 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.00" />
+        app:layout_constraintVertical_bias="000"
+        app:layout_constraintHorizontal_bias="0.10"/>
 
     <TextView
         android:id="@+id/textRulesSubTitle"
+        android:accessibilityTraversalBefore="@+id/textRulesContent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/colorPrimaryDark"
@@ -36,11 +38,12 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15" />
+        app:layout_constraintVertical_bias="0.07"
+        app:layout_constraintHorizontal_bias="0.500"
+        />
 
     <TextView
         android:id="@+id/textRulesContent"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
@@ -53,17 +56,20 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintVertical_bias="0.30" />
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintVertical_bias="0.45"
+        app:layout_constraintWidth_percent="0.70"
+        android:layout_width="0px" />
 
     <Button
         android:backgroundTint="@color/colorButton"
         android:textColor="@color/colorButtonText"
+        android:accessibilityTraversalBefore="@+id/rulesPlayability"
         android:id="@+id/rulesMain"
         android:layout_width="0px"
         android:layout_height="0px"
-        app:layout_constraintHeight_percent="0.12"
-        app:layout_constraintWidth_percent="0.40"
+        app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintWidth_percent="0.20"
         android:text="General"
         android:contentDescription="General"
         android:textSize="20dp"
@@ -72,18 +78,17 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.12"
-        app:layout_constraintVertical_bias="0.800" />
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintVertical_bias="0.200" />
     <Button
         android:backgroundTint="@color/colorButton"
         android:textColor="@color/colorButtonText"
         android:id="@+id/rulesPlayability"
         android:layout_width="0px"
         android:layout_height="0px"
-        app:layout_constraintHeight_percent="0.12"
-        app:layout_constraintWidth_percent="0.40"
+        app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintWidth_percent="0.20"
         android:text="Juego"
-        android:contentDescription="Juego"
         android:textSize="20dp"
         android:fontFamily="@font/architects_daughter"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -91,35 +96,16 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintVertical_bias="0.80" />
+        app:layout_constraintVertical_bias="0.40" />
     <Button
         android:backgroundTint="@color/colorButton"
         android:textColor="@color/colorButtonText"
         android:id="@+id/rulesHand"
         android:layout_width="0px"
         android:layout_height="0px"
-        app:layout_constraintHeight_percent="0.12"
-        app:layout_constraintWidth_percent="0.40"
+        app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintWidth_percent="0.20"
         android:text="Manos"
-        android:contentDescription="Manos"
-        android:textSize="20dp"
-        android:fontFamily="@font/architects_daughter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintHorizontal_bias="0.12"
-        app:layout_constraintVertical_bias="0.950" />
-    <Button
-        android:backgroundTint="@color/colorButton"
-        android:textColor="@color/colorButtonText"
-        android:id="@+id/rulesPoints"
-        android:layout_width="0px"
-        android:layout_height="0px"
-        app:layout_constraintHeight_percent="0.12"
-        app:layout_constraintWidth_percent="0.40"
-        android:text="Puntos"
-        android:contentDescription="Puntos"
         android:textSize="20dp"
         android:fontFamily="@font/architects_daughter"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -127,5 +113,22 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintVertical_bias="0.95" />
+        app:layout_constraintVertical_bias="0.60" />
+    <Button
+        android:backgroundTint="@color/colorButton"
+        android:textColor="@color/colorButtonText"
+        android:id="@+id/rulesPoints"
+        android:layout_width="0px"
+        android:layout_height="0px"
+        app:layout_constraintHeight_percent="0.15"
+        app:layout_constraintWidth_percent="0.20"
+        android:text="Puntos"
+        android:textSize="20dp"
+        android:fontFamily="@font/architects_daughter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintVertical_bias="0.8" />
 </android.support.constraint.ConstraintLayout>
