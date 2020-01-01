@@ -1,7 +1,9 @@
 package jordibarea.tfg.Activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +11,6 @@ import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import jordibarea.tfg.MusicPlayer;
 import jordibarea.tfg.R;
 
 public class RulesActivity extends Activity {
@@ -18,6 +19,9 @@ public class RulesActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rules);
+
+        SharedPreferences sharedPref = this.getSharedPreferences("settings", Context.MODE_PRIVATE);
+        final boolean soundOn = sharedPref.getBoolean("Sound",true);
 
         final MediaPlayer buttonSound = MediaPlayer.create(this,R.raw.button_sound);
 
@@ -28,10 +32,13 @@ public class RulesActivity extends Activity {
 
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                if (soundOn){
+                    buttonSound.start();
+                }
                 TextView title = (TextView) findViewById(R.id.textRulesSubTitle);
                 TextView content = (TextView) findViewById(R.id.textRulesContent);
                 title.setText("General");
-                content.setText("- Juego de cartas de dos jugadores\n- Cartas de la baraja española \nOrden cartas: \n · 1 \n · 3 \n · Resto de cartas en orden descendiente \n- Objetivo: ganar mas puntos que el rival");
+                content.setText("- Juego de cartas de dos jugadores\n- Cartas de la baraja española \nOrden cartas: \n · 1 \n · 3 \n · Resto de cartas en orden descendiente (12, 11, 10...) \n- Objetivo: ganar mas puntos que el rival");
             }
         });
 
@@ -39,6 +46,9 @@ public class RulesActivity extends Activity {
 
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                if (soundOn){
+                    buttonSound.start();
+                }
                 TextView title = (TextView) findViewById(R.id.textRulesSubTitle);
                 TextView content = (TextView) findViewById(R.id.textRulesContent);
                 title.setText("Juego");
@@ -49,6 +59,9 @@ public class RulesActivity extends Activity {
 
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                if (soundOn){
+                    buttonSound.start();
+                }
                 TextView title = (TextView) findViewById(R.id.textRulesSubTitle);
                 TextView content = (TextView) findViewById(R.id.textRulesContent);
                 title.setText("Manos");
@@ -59,6 +72,9 @@ public class RulesActivity extends Activity {
 
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
+                if (soundOn){
+                    buttonSound.start();
+                }
                 TextView title = (TextView) findViewById(R.id.textRulesSubTitle);
                 TextView content = (TextView) findViewById(R.id.textRulesContent);
                 title.setText("Puntos");
@@ -66,9 +82,14 @@ public class RulesActivity extends Activity {
             }
         });
     }
-    protected void onDestroy() {
-        //stop service and stop music
-        stopService(new Intent(getApplicationContext(), MusicPlayer.class));
-        super.onDestroy();
+//    protected void onDestroy() {
+//        //stop service and stop music
+//        stopService(new Intent(getApplicationContext(), MusicPlayer.class));
+//        super.onDestroy();
+//    }
+    @Override
+    public void onBackPressed() {
+        Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+        startActivityForResult(myIntent, 0);
     }
 }

@@ -20,11 +20,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activities.GameOptionsActivity" android:label=" "></activity>
-        <activity android:name=".Activities.GameActivity" android:label=" "></activity>
+        <activity android:name=".Activities.GameActivity" android:label=" " android:configChanges="keyboardHidden|orientation|screenSize"></activity>
         <activity android:name=".Activities.ConfigurationActivity" android:label=" "></activity>
         <activity android:name=".Activities.WinActivity" android:label=" "></activity>
         <activity android:name=".Activities.RulesActivity" android:label=" "></activity>
-        <service android:name=".MusicPlayer"  android:enabled="true"></service>
     </application>
 
 </manifest>

@@ -1,7 +1,13 @@
 package jordibarea.tfg.Activities;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,33 +20,85 @@ import java.util.Random;
 
 import jordibarea.tfg.Card;
 import jordibarea.tfg.Deck;
-import jordibarea.tfg.MusicPlayer;
 import jordibarea.tfg.Player;
 import jordibarea.tfg.R;
 
 public class GameActivity extends Activity {
-    private int cardsLeft = 48;
     private Deck deck = new Deck();
-
-    private Random r = new Random();
+    private int cardsLeft = 48;
     private Player player = new Player();
     private Player rival  = new Player();
     private Card pal;
-    private boolean changeBrisca, firstTurn;
     private int turn;
     private int playerPoints;
-    private int playerCardUsed, rivalCardUsed, lastHands = 0;
+    private int lastHands = 0;
+
+    private int playerCardUsed, rivalCardUsed;
+    private boolean firstTurn, easy;
 
     ImageButton palCard;
     ImageView rivalThrownImg, playerThrownImg;
     TextView textCardsRemaining;
     MediaPlayer soundCard, loseSound, winSound;
 
+    SharedPreferences sharedPref;
+    boolean soundOn;
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setContentView(R.layout.game);
+
+        rivalThrownImg = (ImageView) findViewById(R.id.imgRivalThrown);
+        playerThrownImg = (ImageView) findViewById(R.id.imgPlayerThrown);
+        palCard = (ImageButton) findViewById(R.id.imgPal);
+        textCardsRemaining = (TextView) findViewById(R.id.remainingCards);
+
+        ImageButton next = (ImageButton) findViewById(R.id.buttonCard1);
+
+        next.setImageResource(this.player.useCard(0).getImgID());
+        next.announceForAccessibility("Jugador roba "+this.player.useCard(0).toString());
+        next.setContentDescription("" + this.player.useCard(0).toString());
+        next = (ImageButton) findViewById(R.id.buttonCard2);
+        next.setImageResource(this.player.useCard(1).getImgID());
+        next.announceForAccessibility("Jugador roba "+this.player.useCard(1).toString());
+        next.setContentDescription("" + this.player.useCard(1).toString());
+        next = (ImageButton) findViewById(R.id.buttonCard3);
+        next.setImageResource(this.player.useCard(2).getImgID());
+        next.announceForAccessibility("Jugador roba "+this.player.useCard(2).toString());
+        next.setContentDescription("" + this.player.useCard(2).toString());
+
+        textCardsRemaining.setContentDescription("Cartas en la baraja "+this.cardsLeft);
+        textCardsRemaining.setText(" " + this.cardsLeft + " ");
+
+        palCard.setImageResource(this.deck.getCard(0).getImgID());
+        palCard.announceForAccessibility("La brisca es "+this.deck.getCard(0).toString());
+        palCard.setContentDescription("La brisca es  " + this.deck.getCard(0).toString());
+
+        TextView nextText = (TextView) findViewById(R.id.textYourPoints);
+        nextText.setText("Tus puntos:" + playerPoints);
+        if (turn == 1){
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    rivalInteraction();
+                }
+            }, 2000);
+        }
+        else {
+            initButtons();
+        }
+    }
+
     /** Called when the activity is first created. */
     public void onCreate(Bundle savedInstanceState) {
+        sharedPref = this.getSharedPreferences("settings", Context.MODE_PRIVATE);
+        soundOn = sharedPref.getBoolean("Sound",true);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game);
         firstTurn = getIntent().getBooleanExtra("firstTurn", true);
+        easy = getIntent().getBooleanExtra("easy", true);
 
         rivalThrownImg = (ImageView) findViewById(R.id.imgRivalThrown);
         playerThrownImg = (ImageView) findViewById(R.id.imgPlayerThrown);
@@ -133,14 +191,18 @@ public class GameActivity extends Activity {
             if (turn == 1){
                 rivalCardUsed = IA();
                 rivalThrownImg.setImageResource(rival.useCard(rivalCardUsed).getImgID());
-                soundCard.start();
+                if (soundOn){
+                    soundCard.start();
+                }
                 rivalThrownImg.announceForAccessibility("Rival usa " + rival.useCard(rivalCardUsed).toString());
                 rivalThrownImg.setContentDescription("Carta usada por el rival " + rival.useCard(rivalCardUsed).toString());
             }
             else {
                 rivalCardUsed = IA();
                 rivalThrownImg.setImageResource(rival.useCard(rivalCardUsed).getImgID());
-                soundCard.start();
+                if (soundOn){
+                    soundCard.start();
+                }
                 rivalThrownImg.announceForAccessibility("Rival usa " + rival.useCard(rivalCardUsed).toString());
                 rivalThrownImg.setContentDescription("Carta usada por el rival " + rival.useCard(rivalCardUsed).toString());
                 final Handler handler = new Handler();
@@ -160,7 +222,9 @@ public class GameActivity extends Activity {
             if (turn == 1){
                 rivalCardUsed = IA();
                 rivalThrownImg.setImageResource(rival.useCard(rivalCardUsed).getImgID());
-                soundCard.start();
+                if (soundOn){
+                    soundCard.start();
+                }
                 rivalThrownImg.announceForAccessibility("Rival usa " + rival.useCard(rivalCardUsed).toString());
                 rivalThrownImg.setContentDescription("Carta usada por el rival " + rival.useCard(rivalCardUsed).toString());
                 if (rivalCardUsed == 0) {
@@ -179,7 +243,9 @@ public class GameActivity extends Activity {
             else {
                 rivalCardUsed = IA();
                 rivalThrownImg.setImageResource(rival.useCard(rivalCardUsed).getImgID());
-                soundCard.start();
+                if (soundOn){
+                    soundCard.start();
+                }
                 rivalThrownImg.announceForAccessibility("Rival usa " + rival.useCard(rivalCardUsed).toString());
                 rivalThrownImg.setContentDescription("Carta usada por el rival " + rival.useCard(rivalCardUsed).toString());
                 final Handler handler = new Handler();
@@ -214,26 +280,53 @@ public class GameActivity extends Activity {
         double effectiveValue;
         double bestValue;
         int bestCard = 0;
-        if (turn == 0){
-            bestValue = -5000;
-            for (int i = 0; i < 3; i++) {
-                if (rival.useCard(i) != null){
-                    effectiveValue = 9.5 * getCardReward(rival.useCard(i), player.useCard(playerCardUsed)) - 2 * getCardCost(rival.useCard(i));
-                    if (effectiveValue > bestValue) {
-                        bestCard = i;
-                        bestValue = effectiveValue;
+        if (!easy){
+            if (turn == 0){
+                bestValue = -5000;
+                for (int i = 0; i < 3; i++) {
+                    if (rival.useCard(i) != null){
+                        effectiveValue = 9.5 * getCardReward(rival.useCard(i), player.useCard(playerCardUsed)) - 2 * getCardCost(rival.useCard(i));
+                        if (effectiveValue > bestValue) {
+                            bestCard = i;
+                            bestValue = effectiveValue;
+                        }
                     }
                 }
             }
-        }
-        else {
-            bestValue = 5000;
-            for (int i = 0; i < 3; i++){
-                if (rival.useCard(i) != null){
-                    effectiveValue = getCardCost(rival.useCard(i));
-                    if (effectiveValue < bestValue){
-                        bestCard = i;
-                        bestValue = effectiveValue;
+            else {
+                bestValue = 5000;
+                for (int i = 0; i < 3; i++){
+                    if (rival.useCard(i) != null){
+                        effectiveValue = getCardCost(rival.useCard(i));
+                        if (effectiveValue < bestValue){
+                            bestCard = i;
+                            bestValue = effectiveValue;
+                        }
+                    }
+                }
+            }
+        } else {
+            if (turn == 0){
+                bestValue = -5000;
+                for (int i = 0; i < 3; i++) {
+                    if (rival.useCard(i) != null){
+                        effectiveValue = getCardReward(rival.useCard(i), player.useCard(playerCardUsed));
+                        if (effectiveValue > bestValue) {
+                            bestCard = i;
+                            bestValue = effectiveValue;
+                        }
+                    }
+                }
+            }
+            else {
+                bestValue = 5000;
+                for (int i = 0; i < 3; i++){
+                    if (rival.useCard(i) != null){
+                        effectiveValue = getCardCost(rival.useCard(i));
+                        if (effectiveValue < bestValue){
+                            bestCard = i;
+                            bestValue = effectiveValue;
+                        }
                     }
                 }
             }
@@ -247,11 +340,14 @@ public class GameActivity extends Activity {
 
         turn = decideWinner(player.useCard(playerCardUsed), rival.useCard(rivalCardUsed), turn);
         if (cardsLeft == 0) {
-
             if (lastHands != 2) {
                 finalCards();
                 lastHands++;
             } else {
+                if (turn == 0) {
+                    addPoints(player.useCard(playerCardUsed));
+                    addPoints(rival.useCard(rivalCardUsed));
+                }
                 Intent myIntent = new Intent(this.getBaseContext(), WinActivity.class);
                 myIntent.putExtra("points",playerPoints);
                 startActivityForResult(myIntent, 0);
@@ -259,7 +355,9 @@ public class GameActivity extends Activity {
         }
         else {
             if (turn == 0){
-                winSound.start();
+                if (soundOn){
+                    winSound.start();
+                }
                 playerThrownImg.announceForAccessibility("Gana jugador");
                 addPoints(player.useCard(playerCardUsed));
                 addPoints(rival.useCard(rivalCardUsed));
@@ -304,7 +402,10 @@ public class GameActivity extends Activity {
                 }
                 initButtons();
             } else {
-                loseSound.start();
+                if (soundOn){
+                    loseSound.start();
+                }
+
                 playerThrownImg.announceForAccessibility("Gana rival");
                 this.cardsLeft -= 1;
                 textCardsRemaining.setContentDescription("Cartas en la baraja "+this.cardsLeft);
@@ -363,7 +464,9 @@ public class GameActivity extends Activity {
         turn = decideWinner(player.useCard(playerCardUsed), rival.useCard(rivalCardUsed), turn);
 
         if (turn == 0){
-            winSound.start();
+            if (soundOn){
+                winSound.start();
+            }
             playerThrownImg.announceForAccessibility("Gana jugador");
             addPoints(player.useCard(playerCardUsed));
             addPoints(rival.useCard(rivalCardUsed));
@@ -380,7 +483,9 @@ public class GameActivity extends Activity {
             }
             initButtons();
         } else {
-            loseSound.start();
+            if (soundOn){
+                loseSound.start();
+            }
             playerThrownImg.announceForAccessibility("Gana rival");
             rival.drawCard(rivalCardUsed,null);
             if(playerCardUsed == 0){
@@ -465,7 +570,9 @@ public class GameActivity extends Activity {
         ImageButton next = (ImageButton) findViewById(R.id.buttonCard1);
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                soundCard.start();
+                if (soundOn){
+                    soundCard.start();
+                }
                 disableButtons();
                 ImageButton actual = (ImageButton) findViewById(R.id.buttonCard1);
                 playerCardUsed = 0;
@@ -503,7 +610,9 @@ public class GameActivity extends Activity {
         next = (ImageButton) findViewById(R.id.buttonCard2);
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                soundCard.start();
+                if (soundOn){
+                    soundCard.start();
+                }
                 disableButtons();
                 ImageButton actual = (ImageButton) findViewById(R.id.buttonCard2);
                 playerCardUsed = 1;
@@ -541,7 +650,9 @@ public class GameActivity extends Activity {
         next = (ImageButton) findViewById(R.id.buttonCard3);
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                soundCard.start();
+                if (soundOn){
+                    soundCard.start();
+                }
                 disableButtons();
                 ImageButton actual = (ImageButton) findViewById(R.id.buttonCard3);
                 playerCardUsed = 2;
@@ -584,8 +695,12 @@ public class GameActivity extends Activity {
                 extra = deck.getCard(0);
                 for (int i = 0 ; i < 3 ; i++ ){
                     if (player.useCard(i).getType() == extra.getType() && player.useCard(i).getValue() == 7) {
-                        soundCard.start();
-                        soundCard.start();
+                        if (soundOn){
+                            soundCard.start();
+                        }
+                        if (soundOn){
+                            soundCard.start();
+                        }
                         deck.swapCards(0,player.useCard(i));
                         player.drawCard(i, extra);
                         ImageButton actual;
@@ -684,9 +799,25 @@ public class GameActivity extends Activity {
 
     }
 
+    @Override
     protected void onDestroy() {
-        //stop service and stop music
-        stopService(new Intent(getApplicationContext(), MusicPlayer.class));
         super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Acabar partida")
+                .setMessage("La partida no se guardará! Estas seguro que quieres salir?")
+                .setPositiveButton("Si", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 }
