@@ -14,14 +14,15 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/colorPrimaryDark"
         android:text="Normas"
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:textColor="@color/colorText"
         android:fontFamily="casual"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.00" />
+        app:layout_constraintVertical_bias="0.05"
+        app:layout_constraintHorizontal_bias="0.15"/>
 
     <TextView
         android:id="@+id/textRulesSubTitle"
@@ -36,7 +37,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15" />
+        app:layout_constraintVertical_bias="0.065"
+        app:layout_constraintHorizontal_bias="0.85"/>
 
     <TextView
         android:id="@+id/textRulesContent"
@@ -47,7 +49,7 @@
         android:backgroundTint="@color/colorPrimaryDark"
         android:text="- Juego de cartas de dos jugadores\n- Cartas de la baraja española \nOrden cartas: \n · 1 \n · 3 \n · Resto de cartas en orden descendiente (12, 11, 10...) \n- Objetivo: ganar mas puntos que el rival"
         android:textColor="@color/colorText"
-        android:textSize="15sp"
+        android:textSize="14sp"
         android:fontFamily="casual"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -66,7 +68,7 @@
         app:layout_constraintWidth_percent="0.40"
         android:text="General"
         android:contentDescription="General"
-        android:textSize="20dp"
+        android:textSize="16sp"
         android:fontFamily="casual"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -84,7 +86,7 @@
         app:layout_constraintWidth_percent="0.40"
         android:text="Juego"
         android:contentDescription="Juego"
-        android:textSize="20dp"
+        android:textSize="16sp"
         android:fontFamily="casual"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -102,7 +104,7 @@
         app:layout_constraintWidth_percent="0.40"
         android:text="Manos"
         android:contentDescription="Manos"
-        android:textSize="20dp"
+        android:textSize="16sp"
         android:fontFamily="casual"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -120,7 +122,7 @@
         app:layout_constraintWidth_percent="0.40"
         android:text="Puntos"
         android:contentDescription="Puntos"
-        android:textSize="20dp"
+        android:textSize="16sp"
         android:fontFamily="casual"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

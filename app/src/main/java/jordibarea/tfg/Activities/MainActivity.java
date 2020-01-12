@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     buttonSound.start();
                 }
                 Intent myIntent = new Intent(view.getContext(), RulesActivity.class);
+                myIntent.putExtra("rules_menu",0);
                 startActivityForResult(myIntent, 0);
             }
 

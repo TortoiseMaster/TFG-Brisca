@@ -14,19 +14,37 @@ import android.widget.TextView;
 import jordibarea.tfg.R;
 
 public class RulesActivity extends Activity {
-
+    int rules_menu;
     /** Called when the activity is first created. */
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.rules);
 
+        rules_menu = getIntent().getIntExtra("rules_menu",0);
+
+        TextView title = (TextView) findViewById(R.id.textRulesSubTitle);
+        TextView content = (TextView) findViewById(R.id.textRulesContent);
+
+        if (rules_menu == 0) {
+            title.setText("General");
+            content.setText("- Juego de cartas de dos jugadores\n- Cartas de la baraja española \nOrden cartas: \n · 1 \n · 3 \n · Resto de cartas en orden descendiente (12, 11, 10...) \n- Objetivo: ganar mas puntos que el rival");
+        }
+        else if (rules_menu == 1){
+            title.setText("Juego");
+            content.setText("- Cada jugador tiene 3 cartas en la mano\n- En cada mano cada jugador usa una y roba otra hasta agotar las cartas  \n- La brisca es la carta que indica el palo que domina en la partida\n- Puedes cambiar la brisca si tienes el 7 del mismo palo");
+        }
+        else if (rules_menu == 2){
+            title.setText("Manos");
+            content.setText("- El ganador de la mano anterior tira la primera carta\nQuien gana? \n · Gana la carta mas alta del palo de la brisca  \n · Si no hay, gana la carta mas alta del palo de la primera carta tirada \n- El jugador suma los puntos de las cartas ganadas");
+        }
+        else {
+            title.setText("Puntos");
+            content.setText("Valor de las cartas:\n - 1 = 11 puntos\n - 3 = 10 puntos\n - 12 = 4 puntos\n - 11 = 3 puntos\n - 10 = 2 puntos\n - Otras = 0 puntos");
+        }
         SharedPreferences sharedPref = this.getSharedPreferences("settings", Context.MODE_PRIVATE);
         final boolean soundOn = sharedPref.getBoolean("Sound",true);
 
         final MediaPlayer buttonSound = MediaPlayer.create(this,R.raw.button_sound);
-
-        TextView title = (TextView) findViewById(R.id.textRulesSubTitle);
-        TextView content = (TextView) findViewById(R.id.textRulesContent);
 
         Button next = (Button) findViewById(R.id.rulesMain);
 
@@ -35,10 +53,9 @@ public class RulesActivity extends Activity {
                 if (soundOn){
                     buttonSound.start();
                 }
-                TextView title = (TextView) findViewById(R.id.textRulesSubTitle);
-                TextView content = (TextView) findViewById(R.id.textRulesContent);
-                title.setText("General");
-                content.setText("- Juego de cartas de dos jugadores\n- Cartas de la baraja española \nOrden cartas: \n · 1 \n · 3 \n · Resto de cartas en orden descendiente (12, 11, 10...) \n- Objetivo: ganar mas puntos que el rival");
+                Intent myIntent = new Intent(view.getContext(), RulesActivity.class);
+                myIntent.putExtra("rules_menu",0);
+                startActivityForResult(myIntent, 0);
             }
         });
 
@@ -49,10 +66,9 @@ public class RulesActivity extends Activity {
                 if (soundOn){
                     buttonSound.start();
                 }
-                TextView title = (TextView) findViewById(R.id.textRulesSubTitle);
-                TextView content = (TextView) findViewById(R.id.textRulesContent);
-                title.setText("Juego");
-                content.setText("- Cada jugador tiene 3 cartas en la mano\n- En cada mano cada jugador usa una y roba otra hasta agotar las cartas  \n- La brisca es la carta que indica el palo que domina en la partida\n- Puedes cambiar la brisca si tienes el 7 del mismo palo");
+                Intent myIntent = new Intent(view.getContext(), RulesActivity.class);
+                myIntent.putExtra("rules_menu",1);
+                startActivityForResult(myIntent, 0);
             }
         });
         next = (Button) findViewById(R.id.rulesHand);
@@ -62,10 +78,9 @@ public class RulesActivity extends Activity {
                 if (soundOn){
                     buttonSound.start();
                 }
-                TextView title = (TextView) findViewById(R.id.textRulesSubTitle);
-                TextView content = (TextView) findViewById(R.id.textRulesContent);
-                title.setText("Manos");
-                content.setText("- El ganador de la mano anterior tira la primera carta\nQuien gana? \n · Gana la carta mas alta del palo de la brisca  \n · Si no hay, gana la carta mas alta del palo de la primera carta tirada \n- El jugador suma los puntos de las cartas ganadas");
+                Intent myIntent = new Intent(view.getContext(), RulesActivity.class);
+                myIntent.putExtra("rules_menu",2);
+                startActivityForResult(myIntent, 0);
             }
         });
         next = (Button) findViewById(R.id.rulesPoints);
@@ -75,10 +90,9 @@ public class RulesActivity extends Activity {
                 if (soundOn){
                     buttonSound.start();
                 }
-                TextView title = (TextView) findViewById(R.id.textRulesSubTitle);
-                TextView content = (TextView) findViewById(R.id.textRulesContent);
-                title.setText("Puntos");
-                content.setText("Valor de las cartas:\n - 1: 11 puntos\n - 3: 10 puntos\n - 12: 4 puntos\n - 11: 3 puntos\n - 10: 2 puntos\n - Otras: 0 puntos");
+                Intent myIntent = new Intent(view.getContext(), RulesActivity.class);
+                myIntent.putExtra("rules_menu", 3);
+                startActivityForResult(myIntent, 0);
             }
         });
     }

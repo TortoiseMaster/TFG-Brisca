@@ -66,7 +66,7 @@ public class WinActivity  extends Activity {
             text.setText("EMPATE!");
             text.setContentDescription("Empate.");
         }
-        if (soundOn){
+        if (soundOn && points != 60){
             winnerSound.start();
         }
         text = (TextView) findViewById(R.id.textPointsWinner);
