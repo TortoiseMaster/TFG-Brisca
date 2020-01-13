@@ -1,12 +1,10 @@
 package jordibarea.tfg;
 
-import java.util.ResourceBundle;
-
 public class Card {
     private int value;
     private int type;
-    private String imagePath;
     private int imgID;
+
     public Card (int value, int type, int imgID){
         this.value = value;
         this.type = type;
@@ -22,6 +20,7 @@ public class Card {
     public int getImgID(){
         return this.imgID;
     }
+
     public String toString(){
         String str = "" + this.value;
         switch (this.type){

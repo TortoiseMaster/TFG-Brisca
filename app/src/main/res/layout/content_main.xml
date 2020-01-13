@@ -7,53 +7,32 @@
 
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/colorPrimaryDark"
-        android:contentDescription="Brisca accesible"
+        android:contentDescription="@string/app_name"
         android:fontFamily="casual"
-        android:text="BRISCA ACCESIBLE"
+        android:text="@string/app_name"
+        android:textAllCaps="true"
         android:textAlignment="center"
         android:textColor="@color/colorText"
         android:textSize="30sp"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.15" />
-
-    <!--<TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Normes:\n
-- 3 cartes en ma\n
-- 3 cartes en ma\n
-- 3 cartes en ma\n
-- 3 cartes en ma\n
-- 3 cartes en ma\n
-"
-        android:textSize="75px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />-->
-
-
-    <!--android:background="@drawable/buttonshape"-->
     <Button
         android:id="@+id/buttonNewGame"
         android:backgroundTint="@color/colorButton"
         android:textColor="@color/colorButtonText"
         android:layout_width="0px"
         android:layout_height="0px"
-        android:contentDescription="Nueva partida"
+        android:contentDescription="@string/new_game"
         android:fontFamily="casual"
-        android:text="Nueva partida"
+        android:text="@string/new_game"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_percent="0.20"
@@ -63,24 +42,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.70"
         app:layout_constraintWidth_percent="0.885" />
-    <!--app:layout_constraintWidth_percent="0.40"-->
-    <!--<Button
-        android:id="@+id/buttonContinueGame"
-        android:layout_width="0px"
-        android:layout_height="0px"
-        app:layout_constraintHeight_percent="0.20"
-        app:layout_constraintWidth_percent="0.40"
-        android:text="Continuar"
-        android:contentDescription="Continuar partida"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.65"
-        app:layout_constraintHorizontal_bias="0.9"
-        android:enabled="false"/>-->
-
     <Button
         android:backgroundTint="@color/colorButton"
         android:textColor="@color/colorButtonText"
@@ -89,8 +50,8 @@
         android:layout_height="0px"
         app:layout_constraintHeight_percent="0.15"
         app:layout_constraintWidth_percent="0.40"
-        android:text="Opciones"
-        android:contentDescription="Opciones"
+        android:text="@string/action_settings"
+        android:contentDescription="@string/action_settings"
         android:textSize="16sp"
         android:fontFamily="casual"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -107,8 +68,8 @@
         android:layout_height="0px"
         app:layout_constraintHeight_percent="0.15"
         app:layout_constraintWidth_percent="0.40"
-        android:text="Reglas"
-        android:contentDescription="Reglas"
+        android:text="@string/rules"
+        android:contentDescription="@string/rules"
         android:textSize="16sp"
         android:fontFamily="casual"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -117,6 +78,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_bias="0.9"
         app:layout_constraintVertical_bias="0.95" />
-
-
 </android.support.constraint.ConstraintLayout>

@@ -19,12 +19,16 @@ public class ConfigurationActivity extends Activity {
         setContentView(R.layout.options_menu);
 
         Switch switchElement = (Switch) findViewById(R.id.switchSound);
+
+        // default value of the switch according to the previous introduced value
         if (sharedPref.getBoolean("Sound",true) == true){
             switchElement.setChecked(true);
         }
         else {
             switchElement.setChecked(false);
         }
+
+        // Event that manages the switch changes
         switchElement.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){

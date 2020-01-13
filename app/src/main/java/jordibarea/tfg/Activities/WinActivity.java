@@ -53,25 +53,25 @@ public class WinActivity  extends Activity {
 
         TextView text = (TextView) findViewById(R.id.textWinner);
         if (points > 60) {
-            text.setText("HAS GANADO!");
-            text.setContentDescription("Has ganado!");
+            text.setText(getString(R.string.win_message));
+            text.setContentDescription(getString(R.string.win_message));
             winnerSound = MediaPlayer.create(this, R.raw.victory);
         }
         else if (points < 60) {
-            text.setText("HAS PERDIDO!");
-            text.setContentDescription("Has perdido.");
+            text.setText(getString(R.string.lose_message));
+            text.setContentDescription(getString(R.string.lose_message));
             winnerSound = MediaPlayer.create(this, R.raw.match_defeat);
         }
         else {
-            text.setText("EMPATE!");
-            text.setContentDescription("Empate.");
+            text.setText(getString(R.string.draw_message));
+            text.setContentDescription(getString(R.string.draw_message));
         }
         if (soundOn && points != 60){
             winnerSound.start();
         }
         text = (TextView) findViewById(R.id.textPointsWinner);
-        text.setText("Tus puntos: " + points +"\nPuntos rival: "+(120 - points));
-        text.setContentDescription("Tus puntos: " + points +" Puntos rival: "+(120 - points));
+        text.setText(getString(R.string.your_points) + points +"\n"+ getString(R.string.rival_points)  +(120 - points));
+        text.setContentDescription(getString(R.string.your_points) + points + getString(R.string.rival_points) + (120 - points));
 
     }
 //    protected void onDestroy() {

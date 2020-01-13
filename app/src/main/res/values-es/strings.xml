@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Brisca Accesible</string>
+    <string name="action_settings">Opciones</string>
+    <string name="sound">Sonidos: </string>
+    <string name="new_game">Nueva partida</string>
+    <string name="rules">Reglas</string>
+    <string name="chose_level">Elije nivel de dificultad:</string>
+    <string name="easy">Fácil</string>
+    <string name="hard">Difícil</string>
+    <string name="settings_game">Opciones partida</string>
+    <string name="want_to_start">Quiero empezar:</string>
+    <string name="play">Jugar</string>
+    <string name="win_message">HAS GANADO!</string>
+    <string name="lose_message">HAS PERDIDO!</string>
+    <string name="draw_message">EMPATE!</string>
+    <string name="your_points">Tus puntos: </string>
+    <string name="rival_points">Puntos rival: </string>
+    <string name="replay">Volver a jugar</string>
+    <string name="main_screen">Menu inicial</string>
+    <string name="general">General</string>
+    <string name="rules_play">Jugar</string>
+    <string name="rules_hands">Manos</string>
+    <string name="rules_points">Puntos</string>
+    <string name="content_general">- Juego de cartas de dos jugadores\n
+- Cartas de la baraja española\n
+Orden cartas:\n
+ · 1
+ · 3\n
+ · Resto de cartas en orden descendiente (12, 11, 10...)\n
+- Objetivo: ganar mas puntos que el rival</string>
+    <string name="content_play">- Cada jugador tiene 3 cartas en la mano\n
+- En cada mano cada jugador usa una y roba otra hasta agotar las cartas\n
+- La brisca es la carta que indica el palo que domina en la partida\n
+- Puedes cambiar la brisca si tienes el 7 del mismo palo</string>
+    <string name="content_hands">- El ganador de la mano anterior tira la primera carta\n
+Quien gana?\n
+ · Gana la carta mas alta del palo de la brisca\n
+ · Si no hay, gana la carta mas alta del palo de la primera carta tirada\n
+- El jugador suma los puntos de las cartas ganadas</string>
+    <string name="content_points">Valor de las cartas:\n
+ - 1 = 11 puntos\n
+ - 3 = 10 puntos\n
+ - 12 = 4 puntos\n
+ - 11 = 3 puntos\n
+ - 10 = 2 puntos\n
+ - Otras = 0 puntos</string>
+    <string name="deck">Baraja</string>
+    <string name="remaining_cards">Cartas restantes: </string>
+    <string name="brisca">La brisca es</string>
+    <string name="rival_card">Carta rival</string>
+    <string name="current_points">Tus puntos: </string>
+    <string name="hand_win">Gana jugador</string>
+    <string name="hand_lost">Gana rival</string>
+    <string name="player_use">Jugador tira </string>
+    <string name="rival_use">Rival tira </string>
+    <string name="player_draws">Jugador roba </string>
+    <string name="last_hands">Últimas manos</string>
+    <string name="change_brisca">Jugador cambia brisca </string>
+    <string name="change_brisca2"> por </string>
+    <string name="alert_title">Acabar partida</string>
+    <string name="alert_message">La partida no se guardará! Estas seguro que quieres salir?</string>
+    <string name="alert_confirm">Si</string>
+    <string name="alert_deny">No</string>
+    <string name="suit_spades">Espadas</string>
+    <string name="suit_cups">Copas</string>
+    <string name="suit_gold">Oros</string>
+    <string name="suit_clubs">Bastos</string>
+</resources>

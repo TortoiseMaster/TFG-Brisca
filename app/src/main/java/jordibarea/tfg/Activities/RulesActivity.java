@@ -26,20 +26,20 @@ public class RulesActivity extends Activity {
         TextView content = (TextView) findViewById(R.id.textRulesContent);
 
         if (rules_menu == 0) {
-            title.setText("General");
-            content.setText("- Juego de cartas de dos jugadores\n- Cartas de la baraja española \nOrden cartas: \n · 1 \n · 3 \n · Resto de cartas en orden descendiente (12, 11, 10...) \n- Objetivo: ganar mas puntos que el rival");
+            title.setText(getString(R.string.general));
+            content.setText(getString(R.string.content_general));
         }
         else if (rules_menu == 1){
-            title.setText("Juego");
-            content.setText("- Cada jugador tiene 3 cartas en la mano\n- En cada mano cada jugador usa una y roba otra hasta agotar las cartas  \n- La brisca es la carta que indica el palo que domina en la partida\n- Puedes cambiar la brisca si tienes el 7 del mismo palo");
+            title.setText(getString(R.string.rules_play));
+            content.setText(getString(R.string.content_play));
         }
         else if (rules_menu == 2){
-            title.setText("Manos");
-            content.setText("- El ganador de la mano anterior tira la primera carta\nQuien gana? \n · Gana la carta mas alta del palo de la brisca  \n · Si no hay, gana la carta mas alta del palo de la primera carta tirada \n- El jugador suma los puntos de las cartas ganadas");
+            title.setText(getString(R.string.rules_hands));
+            content.setText(getString(R.string.content_hands));
         }
         else {
-            title.setText("Puntos");
-            content.setText("Valor de las cartas:\n - 1 = 11 puntos\n - 3 = 10 puntos\n - 12 = 4 puntos\n - 11 = 3 puntos\n - 10 = 2 puntos\n - Otras = 0 puntos");
+            title.setText(getString(R.string.rules_points));
+            content.setText(getString(R.string.content_points));
         }
         SharedPreferences sharedPref = this.getSharedPreferences("settings", Context.MODE_PRIVATE);
         final boolean soundOn = sharedPref.getBoolean("Sound",true);

@@ -2,7 +2,6 @@ package jordibarea.tfg.Activities;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,8 +14,6 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.util.Random;
 
 import jordibarea.tfg.Card;
 import jordibarea.tfg.Deck;
@@ -43,6 +40,8 @@ public class GameActivity extends Activity {
 
     SharedPreferences sharedPref;
     boolean soundOn;
+
+    // Manage the rotation of the screen, recharging all the layout elements
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
@@ -56,26 +55,26 @@ public class GameActivity extends Activity {
         ImageButton next = (ImageButton) findViewById(R.id.buttonCard1);
 
         next.setImageResource(this.player.useCard(0).getImgID());
-        next.announceForAccessibility("Jugador roba "+this.player.useCard(0).toString());
+        next.announceForAccessibility(getString(R.string.player_draws)+this.player.useCard(0).toString());
         next.setContentDescription("" + this.player.useCard(0).toString());
         next = (ImageButton) findViewById(R.id.buttonCard2);
         next.setImageResource(this.player.useCard(1).getImgID());
-        next.announceForAccessibility("Jugador roba "+this.player.useCard(1).toString());
+        next.announceForAccessibility(getString(R.string.player_draws)+this.player.useCard(1).toString());
         next.setContentDescription("" + this.player.useCard(1).toString());
         next = (ImageButton) findViewById(R.id.buttonCard3);
         next.setImageResource(this.player.useCard(2).getImgID());
-        next.announceForAccessibility("Jugador roba "+this.player.useCard(2).toString());
+        next.announceForAccessibility(getString(R.string.player_draws)+this.player.useCard(2).toString());
         next.setContentDescription("" + this.player.useCard(2).toString());
 
-        textCardsRemaining.setContentDescription("Cartas en la baraja "+this.cardsLeft);
+        textCardsRemaining.setContentDescription(getString(R.string.remaining_cards)+this.cardsLeft);
         textCardsRemaining.setText(" " + this.cardsLeft + " ");
 
         palCard.setImageResource(this.deck.getCard(0).getImgID());
-        palCard.announceForAccessibility("La brisca es "+this.deck.getCard(0).toString());
-        palCard.setContentDescription("La brisca es  " + this.deck.getCard(0).toString());
+        palCard.announceForAccessibility(getString(R.string.brisca)+this.deck.getCard(0).toString());
+        palCard.setContentDescription(getString(R.string.brisca) + this.deck.getCard(0).toString());
 
         TextView nextText = (TextView) findViewById(R.id.textYourPoints);
-        nextText.setText("Tus puntos:" + playerPoints);
+        nextText.setText(getString(R.string.current_points) + playerPoints);
         if (turn == 1){
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
@@ -119,61 +118,63 @@ public class GameActivity extends Activity {
         initGame();
         initButtons();
     }
+
+    // Initialize all the necessary thing to be able to do a match
     private void initGame(){
         this.cardsLeft -= 1;
-        textCardsRemaining.setContentDescription("Cartas en la baraja "+this.cardsLeft);
+        textCardsRemaining.setContentDescription(getString(R.string.remaining_cards)+this.cardsLeft);
         textCardsRemaining.setText(" " + this.cardsLeft + " ");
         this.player.drawCard(0,this.deck.getCard(this.cardsLeft));
         ImageButton next = (ImageButton) findViewById(R.id.buttonCard1);
         // next.setText(this.deck.getCard(this.cardsLeft).toString());
         next.setImageResource(this.deck.getCard(this.cardsLeft).getImgID());
-        next.announceForAccessibility("Jugador roba "+this.deck.getCard(this.cardsLeft).toString());
+        next.announceForAccessibility(getString(R.string.player_draws)+this.deck.getCard(this.cardsLeft).toString());
         next.setContentDescription("" + this.deck.getCard(this.cardsLeft).toString());
 
         this.cardsLeft -=1;
-        textCardsRemaining.setContentDescription("Cartas en la baraja "+this.cardsLeft);
+        textCardsRemaining.setContentDescription(getString(R.string.remaining_cards)+this.cardsLeft);
         textCardsRemaining.setText(" " + this.cardsLeft + " ");
         this.rival.drawCard(0,this.deck.getCard(this.cardsLeft));
-        textCardsRemaining.setContentDescription("Cartas en la baraja "+this.cardsLeft);
+        textCardsRemaining.setContentDescription(getString(R.string.remaining_cards)+this.cardsLeft);
         textCardsRemaining.setText(" " + this.cardsLeft + " ");
         this.cardsLeft -=1;
-        textCardsRemaining.setContentDescription("Cartas en la baraja "+this.cardsLeft);
+        textCardsRemaining.setContentDescription(getString(R.string.remaining_cards)+this.cardsLeft);
         textCardsRemaining.setText(" " + this.cardsLeft + " ");
         this.player.drawCard(1,this.deck.getCard(this.cardsLeft));
         next = (ImageButton) findViewById(R.id.buttonCard2);
         // next.setText(this.deck.getCard(this.cardsLeft).toString());
         next.setImageResource(this.deck.getCard(this.cardsLeft).getImgID());
-        next.announceForAccessibility("Jugador roba "+this.deck.getCard(this.cardsLeft).toString());
+        next.announceForAccessibility(getString(R.string.player_draws)+this.deck.getCard(this.cardsLeft).toString());
         next.setContentDescription("" + this.deck.getCard(this.cardsLeft).toString());
 
         this.cardsLeft -=1;
-        textCardsRemaining.setContentDescription("Cartas en la baraja "+this.cardsLeft);
+        textCardsRemaining.setContentDescription(getString(R.string.remaining_cards)+this.cardsLeft);
         textCardsRemaining.setText(" " + this.cardsLeft + " ");
         this.rival.drawCard(1,this.deck.getCard(this.cardsLeft));
 
         this.cardsLeft -=1;
-        textCardsRemaining.setContentDescription("Cartas en la baraja "+this.cardsLeft);
+        textCardsRemaining.setContentDescription(getString(R.string.remaining_cards)+this.cardsLeft);
         textCardsRemaining.setText(" " + this.cardsLeft + " ");
         this.player.drawCard(2,this.deck.getCard(this.cardsLeft));
         next = (ImageButton) findViewById(R.id.buttonCard3);
         // next.setText(this.deck.getCard(this.cardsLeft).toString());
         next.setImageResource(this.deck.getCard(this.cardsLeft).getImgID());
-        next.announceForAccessibility("Jugador roba "+this.deck.getCard(this.cardsLeft).toString());
+        next.announceForAccessibility(getString(R.string.player_draws)+this.deck.getCard(this.cardsLeft).toString());
         next.setContentDescription("" + this.deck.getCard(this.cardsLeft).toString());
 
         this.cardsLeft -=1;
-        textCardsRemaining.setContentDescription("Cartas en la baraja "+this.cardsLeft);
+        textCardsRemaining.setContentDescription(getString(R.string.remaining_cards)+this.cardsLeft);
         textCardsRemaining.setText(" " + this.cardsLeft + " ");
         this.rival.drawCard(2,this.deck.getCard(this.cardsLeft));
 
         this.pal = this.deck.getCard(0);
         // palCard.setText(this.deck.getCard(0).toString());
         palCard.setImageResource(this.deck.getCard(0).getImgID());
-        palCard.announceForAccessibility("La brisca es "+this.deck.getCard(0).toString());
-        palCard.setContentDescription("La brisca es  " + this.deck.getCard(0).toString());
+        palCard.announceForAccessibility(getString(R.string.brisca)+this.deck.getCard(0).toString());
+        palCard.setContentDescription(getString(R.string.brisca) + this.deck.getCard(0).toString());
 
         TextView nextText = (TextView) findViewById(R.id.textYourPoints);
-        nextText.setText("Tus puntos:" + playerPoints);
+        nextText.setText(getString(R.string.current_points)+ playerPoints);
         if (turn == 1){
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
@@ -185,26 +186,26 @@ public class GameActivity extends Activity {
         }
     }
 
-
+    // What the rival does when is his turn
     private void rivalInteraction(){
         if (cardsLeft != 0) { // Still cards in the deck
-            if (turn == 1){
-                rivalCardUsed = IA();
+            if (turn == 1){ // Rival has the first turn
+                rivalCardUsed = IA(); // Check which card to use
                 rivalThrownImg.setImageResource(rival.useCard(rivalCardUsed).getImgID());
                 if (soundOn){
                     soundCard.start();
                 }
-                rivalThrownImg.announceForAccessibility("Rival usa " + rival.useCard(rivalCardUsed).toString());
-                rivalThrownImg.setContentDescription("Carta usada por el rival " + rival.useCard(rivalCardUsed).toString());
+                rivalThrownImg.announceForAccessibility(getString(R.string.rival_use) + rival.useCard(rivalCardUsed).toString());
+                rivalThrownImg.setContentDescription(getString(R.string.rival_use) + rival.useCard(rivalCardUsed).toString());
             }
-            else {
+            else { // Rival has the second turn
                 rivalCardUsed = IA();
                 rivalThrownImg.setImageResource(rival.useCard(rivalCardUsed).getImgID());
                 if (soundOn){
                     soundCard.start();
                 }
-                rivalThrownImg.announceForAccessibility("Rival usa " + rival.useCard(rivalCardUsed).toString());
-                rivalThrownImg.setContentDescription("Carta usada por el rival " + rival.useCard(rivalCardUsed).toString());
+                rivalThrownImg.announceForAccessibility(getString(R.string.rival_use) + rival.useCard(rivalCardUsed).toString());
+                rivalThrownImg.setContentDescription(getString(R.string.rival_use) + rival.useCard(rivalCardUsed).toString());
                 final Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -218,15 +219,15 @@ public class GameActivity extends Activity {
                     }
                 }, 3000);
             }
-        } else {  // Only the cards in the hand remain
+        } else { // Only the cards in the hand remain
             if (turn == 1){
                 rivalCardUsed = IA();
                 rivalThrownImg.setImageResource(rival.useCard(rivalCardUsed).getImgID());
                 if (soundOn){
                     soundCard.start();
                 }
-                rivalThrownImg.announceForAccessibility("Rival usa " + rival.useCard(rivalCardUsed).toString());
-                rivalThrownImg.setContentDescription("Carta usada por el rival " + rival.useCard(rivalCardUsed).toString());
+                rivalThrownImg.announceForAccessibility(getString(R.string.rival_use) + rival.useCard(rivalCardUsed).toString());
+                rivalThrownImg.setContentDescription(getString(R.string.rival_use) + rival.useCard(rivalCardUsed).toString());
                 if (rivalCardUsed == 0) {
                     ImageView rivalCardImg = (ImageView) findViewById(R.id.rivalCard1);
                     rivalCardImg.setImageResource(android.R.color.transparent);
@@ -246,10 +247,11 @@ public class GameActivity extends Activity {
                 if (soundOn){
                     soundCard.start();
                 }
-                rivalThrownImg.announceForAccessibility("Rival usa " + rival.useCard(rivalCardUsed).toString());
-                rivalThrownImg.setContentDescription("Carta usada por el rival " + rival.useCard(rivalCardUsed).toString());
+                rivalThrownImg.announceForAccessibility(getString(R.string.rival_use) + rival.useCard(rivalCardUsed).toString());
+                rivalThrownImg.setContentDescription(getString(R.string.rival_use) + rival.useCard(rivalCardUsed).toString());
                 final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
+                handler.postDelayed(new Runnable() { // Wait before drawing cards in order to allow the user
+                    // to understand what happens.
                     @Override
                     public void run() {
                         gameLogic();
@@ -276,6 +278,7 @@ public class GameActivity extends Activity {
         }
     }
 
+    // IT will decide which is the better decision in every moment, explained in the Memory
     private int IA() {
         double effectiveValue;
         double bestValue;
@@ -334,6 +337,7 @@ public class GameActivity extends Activity {
         return bestCard;
     }
 
+    // Controls who has the turn and makes the palayer draw cards.
     public void gameLogic() {
         ImageButton pal = (ImageButton) findViewById(R.id.imgPal);
 
@@ -358,17 +362,17 @@ public class GameActivity extends Activity {
                 if (soundOn){
                     winSound.start();
                 }
-                playerThrownImg.announceForAccessibility("Gana jugador");
+                playerThrownImg.announceForAccessibility(getString(R.string.hand_win));
                 addPoints(player.useCard(playerCardUsed));
                 addPoints(rival.useCard(rivalCardUsed));
 
                 this.cardsLeft -= 1;
-                textCardsRemaining.setContentDescription("Cartas en la baraja "+this.cardsLeft);
+                textCardsRemaining.setContentDescription(getString(R.string.remaining_cards)+this.cardsLeft);
                 textCardsRemaining.setText(" " + this.cardsLeft + " ");
                 this.player.drawCard(playerCardUsed,this.deck.getCard(this.cardsLeft));
                 if(this.cardsLeft == 0){
                     ImageView deckImage = (ImageView) findViewById(R.id.deck);
-                    rivalThrownImg.announceForAccessibility("Últimas manos");
+                    rivalThrownImg.announceForAccessibility(getString(R.string.last_hands));
                     deckImage.setVisibility(View.INVISIBLE);
                     palCard.setEnabled(false);
                     palCard.setAlpha(0.5f);
@@ -376,26 +380,26 @@ public class GameActivity extends Activity {
                 if(playerCardUsed == 0){
                     ImageButton next = (ImageButton) findViewById(R.id.buttonCard1);
                     next.setImageResource(this.deck.getCard(this.cardsLeft).getImgID());
-                    next.announceForAccessibility("Jugador roba " + this.deck.getCard(this.cardsLeft).toString());
+                    next.announceForAccessibility(getString(R.string.player_draws) + this.deck.getCard(this.cardsLeft).toString());
                     next.setContentDescription("" + this.deck.getCard(this.cardsLeft).toString());
                 }else if(playerCardUsed == 1){
                     ImageButton next = (ImageButton) findViewById(R.id.buttonCard2);
                     next.setImageResource(this.deck.getCard(this.cardsLeft).getImgID());
-                    next.announceForAccessibility("Jugador roba " + this.deck.getCard(this.cardsLeft).toString());
+                    next.announceForAccessibility(getString(R.string.player_draws) + this.deck.getCard(this.cardsLeft).toString());
                     next.setContentDescription("" + this.deck.getCard(this.cardsLeft).toString());
                 }else{
                     ImageButton next = (ImageButton) findViewById(R.id.buttonCard3);
                     next.setImageResource(this.deck.getCard(this.cardsLeft).getImgID());
-                    next.announceForAccessibility("Jugador roba " + this.deck.getCard(this.cardsLeft).toString());
+                    next.announceForAccessibility(getString(R.string.player_draws) + this.deck.getCard(this.cardsLeft).toString());
                     next.setContentDescription("" + this.deck.getCard(this.cardsLeft).toString());
                 }
                 this.cardsLeft -= 1;
-                textCardsRemaining.setContentDescription("Cartas en la baraja "+this.cardsLeft);
+                textCardsRemaining.setContentDescription(getString(R.string.remaining_cards)+this.cardsLeft);
                 textCardsRemaining.setText(" " + this.cardsLeft + " ");
                 this.rival.drawCard(rivalCardUsed,this.deck.getCard(this.cardsLeft));
                 if(this.cardsLeft == 0){
                     ImageView deckImage = (ImageView) findViewById(R.id.deck);
-                    rivalThrownImg.announceForAccessibility("Últimas manos");
+                    rivalThrownImg.announceForAccessibility(getString(R.string.last_hands));
                     deckImage.setVisibility(View.INVISIBLE);
                     palCard.setEnabled(false);
                     palCard.setAlpha(0.5f);
@@ -406,25 +410,25 @@ public class GameActivity extends Activity {
                     loseSound.start();
                 }
 
-                playerThrownImg.announceForAccessibility("Gana rival");
+                playerThrownImg.announceForAccessibility(getString(R.string.hand_lost));
                 this.cardsLeft -= 1;
-                textCardsRemaining.setContentDescription("Cartas en la baraja "+this.cardsLeft);
+                textCardsRemaining.setContentDescription(getString(R.string.remaining_cards)+this.cardsLeft);
                 textCardsRemaining.setText(" " + this.cardsLeft + " ");
                 this.rival.drawCard(rivalCardUsed,this.deck.getCard(this.cardsLeft));
                 if(this.cardsLeft == 0){
                     ImageView deckImage = (ImageView) findViewById(R.id.deck);
-                    rivalThrownImg.announceForAccessibility("Últimas manos");
+                    rivalThrownImg.announceForAccessibility(getString(R.string.last_hands));
                     deckImage.setVisibility(View.INVISIBLE);
                     palCard.setEnabled(false);
                     palCard.setAlpha(0.5f);
                 }
                 this.cardsLeft -= 1;
-                textCardsRemaining.setContentDescription("Cartas en la baraja "+this.cardsLeft);
+                textCardsRemaining.setContentDescription(getString(R.string.remaining_cards)+this.cardsLeft);
                 textCardsRemaining.setText(" " + this.cardsLeft + " ");
                 this.player.drawCard(playerCardUsed,this.deck.getCard(this.cardsLeft));
                 if(this.cardsLeft == 0){
                     ImageView deckImage = (ImageView) findViewById(R.id.deck);
-                    rivalThrownImg.announceForAccessibility("Últimas manos");
+                    rivalThrownImg.announceForAccessibility(getString(R.string.last_hands));
                     deckImage.setVisibility(View.INVISIBLE);
                     palCard.setEnabled(false);
                     palCard.setAlpha(0.5f);
@@ -433,19 +437,19 @@ public class GameActivity extends Activity {
                     ImageButton next = (ImageButton) findViewById(R.id.buttonCard1);
                     // next.setText(this.deck.getCard(this.cardsLeft).toString());
                     next.setImageResource(this.deck.getCard(this.cardsLeft).getImgID());
-                    next.announceForAccessibility("Jugador roba " + this.deck.getCard(this.cardsLeft).toString());
+                    next.announceForAccessibility(getString(R.string.player_draws) + this.deck.getCard(this.cardsLeft).toString());
                     next.setContentDescription("" + this.deck.getCard(this.cardsLeft).toString());
                 }else if(playerCardUsed == 1){
                     ImageButton next = (ImageButton) findViewById(R.id.buttonCard2);
                     // next.setText(this.deck.getCard(this.cardsLeft).toString());
                     next.setImageResource(this.deck.getCard(this.cardsLeft).getImgID());
-                    next.announceForAccessibility("Jugador roba " + this.deck.getCard(this.cardsLeft).toString());
+                    next.announceForAccessibility(getString(R.string.player_draws)+ this.deck.getCard(this.cardsLeft).toString());
                     next.setContentDescription("" + this.deck.getCard(this.cardsLeft).toString());
                 }else{
                     ImageButton next = (ImageButton) findViewById(R.id.buttonCard3);
                     // next.setText(this.deck.getCard(this.cardsLeft).toString());
                     next.setImageResource(this.deck.getCard(this.cardsLeft).getImgID());
-                    next.announceForAccessibility("Jugador roba " + this.deck.getCard(this.cardsLeft).toString());
+                    next.announceForAccessibility(getString(R.string.player_draws) + this.deck.getCard(this.cardsLeft).toString());
                     next.setContentDescription("" + this.deck.getCard(this.cardsLeft).toString());
                 }
                 final Handler handler = new Handler();
@@ -460,6 +464,7 @@ public class GameActivity extends Activity {
         }
     }
 
+    // Last hands of the match that don't cards to be drawn
     private void finalCards() {
         turn = decideWinner(player.useCard(playerCardUsed), rival.useCard(rivalCardUsed), turn);
 
@@ -467,7 +472,7 @@ public class GameActivity extends Activity {
             if (soundOn){
                 winSound.start();
             }
-            playerThrownImg.announceForAccessibility("Gana jugador");
+            playerThrownImg.announceForAccessibility(getString(R.string.hand_win));
             addPoints(player.useCard(playerCardUsed));
             addPoints(rival.useCard(rivalCardUsed));
             rival.drawCard(rivalCardUsed,null);
@@ -486,7 +491,7 @@ public class GameActivity extends Activity {
             if (soundOn){
                 loseSound.start();
             }
-            playerThrownImg.announceForAccessibility("Gana rival");
+            playerThrownImg.announceForAccessibility(getString(R.string.hand_lost));
             rival.drawCard(rivalCardUsed,null);
             if(playerCardUsed == 0){
                 ImageButton next = (ImageButton) findViewById(R.id.buttonCard1);
@@ -509,7 +514,7 @@ public class GameActivity extends Activity {
         }
     }
 
-
+    // Given two cards decide which one wins the hand
     private int decideWinner(Card playerCard, Card rivalCard, int turn) {
         if (playerCard.getType() == this.pal.getType()){
             if(rivalCard.getType() == this.pal.getType()){
@@ -527,6 +532,8 @@ public class GameActivity extends Activity {
             }
         }
     }
+
+    // Given two values of cards that should have the same suit tells which one wins the hand
     private int decideWinnerSameType(int valuePlayer,int valueRival){
 
         if(valuePlayer == 1){
@@ -548,6 +555,8 @@ public class GameActivity extends Activity {
         }
     }
 
+
+    // Add the amount of points to the user score
     private void addPoints(Card card){
         if (card.getValue() == 1) {
             playerPoints += 11;
@@ -563,9 +572,11 @@ public class GameActivity extends Activity {
             playerPoints += 0;
         }
         TextView nextText = (TextView) findViewById(R.id.textYourPoints);
-        nextText.setText("Tus puntos:" + playerPoints);
+        nextText.setText(getString(R.string.current_points) + playerPoints);
     }
 
+    // When the result is shown and the cards are drawn we need to desactivate
+    // the buttons bs it doesnt make sence to use the cards then. This method gives the funcionality of the buttons back
     private void initButtons() {
         ImageButton next = (ImageButton) findViewById(R.id.buttonCard1);
         next.setOnClickListener(new View.OnClickListener() {
@@ -578,8 +589,8 @@ public class GameActivity extends Activity {
                 playerCardUsed = 0;
                 if (turn == 0) {
                     playerThrownImg.setImageResource(player.useCard(playerCardUsed).getImgID());
-                    playerThrownImg.announceForAccessibility("Jugador usa " +player.useCard(playerCardUsed).toString());
-                    playerThrownImg.setContentDescription("Carta usada por el jugador " + player.useCard(playerCardUsed).toString());
+                    playerThrownImg.announceForAccessibility(getString(R.string.player_use) +player.useCard(playerCardUsed).toString());
+                    playerThrownImg.setContentDescription(getString(R.string.player_use) + player.useCard(playerCardUsed).toString());
                     final Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -590,8 +601,8 @@ public class GameActivity extends Activity {
                 }
                 else {
                     playerThrownImg.setImageResource(player.useCard(playerCardUsed).getImgID());
-                    playerThrownImg.announceForAccessibility("Jugador usa " +player.useCard(playerCardUsed).toString());
-                    playerThrownImg.setContentDescription("Carta usada por el jugador " + player.useCard(playerCardUsed).toString());
+                    playerThrownImg.announceForAccessibility(getString(R.string.player_use) +player.useCard(playerCardUsed).toString());
+                    playerThrownImg.setContentDescription(getString(R.string.player_use) + player.useCard(playerCardUsed).toString());
                     final Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -618,8 +629,8 @@ public class GameActivity extends Activity {
                 playerCardUsed = 1;
                 if (turn == 0) {
                     playerThrownImg.setImageResource(player.useCard(playerCardUsed).getImgID());
-                    playerThrownImg.announceForAccessibility("Jugador usa " + player.useCard(playerCardUsed).toString());
-                    playerThrownImg.setContentDescription("Carta usada por el jugador " + player.useCard(playerCardUsed).toString());
+                    playerThrownImg.announceForAccessibility(getString(R.string.player_use) + player.useCard(playerCardUsed).toString());
+                    playerThrownImg.setContentDescription(getString(R.string.player_use) + player.useCard(playerCardUsed).toString());
                     final Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -630,8 +641,8 @@ public class GameActivity extends Activity {
                 }
                 else {
                     playerThrownImg.setImageResource(player.useCard(playerCardUsed).getImgID());
-                    playerThrownImg.announceForAccessibility("Jugador usa " +player.useCard(playerCardUsed).toString());
-                    playerThrownImg.setContentDescription("Carta usada por el jugador " + player.useCard(playerCardUsed).toString());
+                    playerThrownImg.announceForAccessibility(getString(R.string.player_use) +player.useCard(playerCardUsed).toString());
+                    playerThrownImg.setContentDescription(getString(R.string.player_use) + player.useCard(playerCardUsed).toString());
                     final Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -658,8 +669,8 @@ public class GameActivity extends Activity {
                 playerCardUsed = 2;
                 if (turn == 0) {
                     playerThrownImg.setImageResource(player.useCard(playerCardUsed).getImgID());
-                    playerThrownImg.announceForAccessibility("Jugador usa " +player.useCard(playerCardUsed).toString());
-                    playerThrownImg.setContentDescription("Carta usada por el jugador " + player.useCard(playerCardUsed).toString());
+                    playerThrownImg.announceForAccessibility(getString(R.string.player_use) +player.useCard(playerCardUsed).toString());
+                    playerThrownImg.setContentDescription(getString(R.string.player_use) + player.useCard(playerCardUsed).toString());
                     final Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -670,8 +681,8 @@ public class GameActivity extends Activity {
                 }
                 else {
                     playerThrownImg.setImageResource(player.useCard(playerCardUsed).getImgID());
-                    playerThrownImg.announceForAccessibility("Jugador usa " +player.useCard(playerCardUsed).toString());
-                    playerThrownImg.setContentDescription("Carta usada por el jugador " + player.useCard(playerCardUsed).toString());
+                    playerThrownImg.announceForAccessibility(getString(R.string.player_use)+player.useCard(playerCardUsed).toString());
+                    playerThrownImg.setContentDescription(getString(R.string.player_use) + player.useCard(playerCardUsed).toString());
                     final Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         @Override
@@ -717,14 +728,17 @@ public class GameActivity extends Activity {
                         actual.setContentDescription("" + player.useCard(i).toString());
                         actual = (ImageButton) findViewById(R.id.imgPal);
                         actual.setImageResource(deck.getCard(0).getImgID());
-                        actual.setContentDescription("La brisca es  " + deck.getCard(0).toString());
-                        actual.announceForAccessibility("Jugador cambia brisca" + player.useCard(i).toString() + " por " + deck.getCard(0).toString());
+                        actual.setContentDescription(getString(R.string.brisca)+ deck.getCard(0).toString());
+                        actual.announceForAccessibility(getString(R.string.change_brisca) + player.useCard(i).toString() + getString(R.string.change_brisca2) + deck.getCard(0).toString());
                     }
                 }
             }
 
         });
     }
+
+    // When the result is shown and the cards are drawn we need to desactivate
+    // the buttons bs it doesnt make sence to use the cards then. This method takes off the funcionality of the buttons
     private void disableButtons() {
         ImageButton next = (ImageButton) findViewById(R.id.buttonCard1);
         next.setOnClickListener(null);
@@ -760,6 +774,8 @@ public class GameActivity extends Activity {
         }
         return value;
     }
+
+    // Used by the IA to get the amount of points given by every card
     private int getCardReward(Card cardToUse, Card cardUsed) {
         int points = 0;
         if (cardToUse.getValue() == 1) {
@@ -767,7 +783,7 @@ public class GameActivity extends Activity {
         }else if (cardToUse.getValue() == 3){
             points += 10;
         }else if (cardToUse.getValue() == 12){
-            points += 4;
+            points += 5;
         }else if (cardToUse.getValue() == 11){
             points += 3;
         }else if (cardToUse.getValue() == 10){
@@ -781,7 +797,7 @@ public class GameActivity extends Activity {
         }else if (cardUsed.getValue() == 3){
             points += 10;
         }else if (cardUsed.getValue() == 12){
-            points += 4;
+            points += 5;
         }else if (cardUsed.getValue() == 11){
             points += 3;
         }else if (cardUsed.getValue() == 10){
@@ -804,12 +820,13 @@ public class GameActivity extends Activity {
         super.onDestroy();
     }
 
+    // Bc we don't save the state of the match we need a confirmation when quitting the game.
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this).setIcon(android.R.drawable.ic_dialog_alert)
-                .setTitle("Acabar partida")
-                .setMessage("La partida no se guardará! Estas seguro que quieres salir?")
-                .setPositiveButton("Si", new DialogInterface.OnClickListener()
+                .setTitle(getString(R.string.alert_title))
+                .setMessage(getString(R.string.alert_message))
+                .setPositiveButton(getString(R.string.alert_confirm), new DialogInterface.OnClickListener()
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -817,7 +834,7 @@ public class GameActivity extends Activity {
                     }
 
                 })
-                .setNegativeButton("No", null)
+                .setNegativeButton(getString(R.string.alert_deny), null)
                 .show();
     }
 }

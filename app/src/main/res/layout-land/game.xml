@@ -62,7 +62,7 @@
 
     <ImageView
         android:id="@+id/deck"
-        android:contentDescription="Baraja"
+        android:contentDescription="@string/deck"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_percent="0.30"
         app:layout_constraintHorizontal_bias="0.05"
@@ -96,7 +96,7 @@
 
     <ImageView
         android:id="@+id/rivalCard1"
-        android:contentDescription="Carta rival 1"
+        android:contentDescription="@string/rival_card"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_percent="0.40"
         app:layout_constraintHorizontal_bias="0.55"
@@ -111,7 +111,7 @@
 
     <ImageView
         android:id="@+id/rivalCard2"
-        android:contentDescription="Carta rival 2"
+        android:contentDescription="@string/rival_card"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHeight_percent="0.40"
         app:layout_constraintHorizontal_bias="0.75"
@@ -126,7 +126,7 @@
 
     <ImageView
         android:id="@+id/rivalCard3"
-        android:contentDescription="Carta rival 3"
+        android:contentDescription="@string/rival_card"
         android:layout_width="0px"
         android:layout_height="0px"
         android:visibility="visible"
@@ -188,26 +188,12 @@
         app:layout_constraintWidth_percent="0.12"
         tools:visibility="visible" />
 
-    <!--<TextView
-        android:id="@+id/textThrownCards"
-        android:text=""
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHeight_percent="0.35"
-        app:layout_constraintHorizontal_bias="0.85"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45"
-        app:layout_constraintWidth_percent="0.35"
-        app:srcCompat="@drawable/ic_launcher_background"
-        android:layout_width="0px"
-        android:layout_height="0px"/>-->
     <TextView
         android:id="@+id/textYourPoints"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="casual"
-        android:text="Tus puntos:"
+        android:text="@string/current_points"
         android:textColor="@color/colorText"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -216,17 +202,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.99"
         app:layout_constraintHorizontal_bias="0.75"/>
-    <!--<TextView
-        android:id="@+id/textTheirPoints"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:text="Sus puntos:"
-        android:textSize="50px"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.05" />-->
 
 </android.support.constraint.ConstraintLayout>
